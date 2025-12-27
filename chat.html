@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat | Ecom Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .chat-container {
+            display: flex;
+            height: calc(100vh - var(--header-height) - 4rem);
+            background-color: var(--bg-panel);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .chat-sidebar {
+            width: 300px;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(15, 23, 42, 0.5);
+        }
+
+        .contact-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .contact-item {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-item:hover,
+        .contact-item.active {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+
+        .messages-area {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .message.received {
+            background-color: var(--bg-input);
+            align-self: flex-start;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .message.sent {
+            background-color: var(--primary-color);
+            align-self: flex-end;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            background-color: var(--bg-panel);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo"><i class="fa-solid fa-cube"></i> NexusAdmin</a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="categories.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Categories</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Orders</a>
+                <a href="users.html" class="nav-item"><i class="fa-solid fa-users"></i> Users</a>
+                <a href="chat.html" class="nav-item active"><i class="fa-solid fa-comments"></i> Chat</a>
+                <a href="banners.html" class="nav-item"><i class="fa-solid fa-images"></i> Banners</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;"><i
+                        class="fa-solid fa-bars"></i></button>
+                <div class="page-title" style="margin: 0; font-size: 1.25rem;">Chat Support</div>
+                <div class="header-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff"
+                        class="profile-img">
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="chat-container">
+                    <div class="chat-sidebar">
+                        <div style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                            <input type="text" class="form-control" placeholder="Search contacts...">
+                        </div>
+                        <div class="contact-list">
+                            <div class="contact-item active">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe"
+                                    style="width: 40px; border-radius: 50%;">
+                                <div>
+                                    <div style="font-weight: 600;">John Doe</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Typing...</div>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <img src="https://ui-avatars.com/api/?name=Alice+Smith"
+                                    style="width: 40px; border-radius: 50%;">
+                                <div>
+                                    <div style="font-weight: 600;">Alice Smith</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Product inquiry...</div>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <img src="https://ui-avatars.com/api/?name=Support+Team"
+                                    style="width: 40px; border-radius: 50%;">
+                                <div>
+                                    <div style="font-weight: 600;">Support Team</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">Ticket #4231</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-main">
+                        <div class="messages-area" id="messagesArea">
+                            <div
+                                style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin-bottom: 1rem;">
+                                Today, 10:23 AM</div>
+                            <div class="message received">
+                                Hello! I have a question about my recent order.
+                            </div>
+                            <div class="message sent">
+                                Hi John! Sure, I'd be happy to help. What's your order number?
+                            </div>
+                            <div class="message received">
+                                It's #ORD-7752. I want to change the delivery address.
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" class="form-control" id="messageInput"
+                                placeholder="Type your message...">
+                            <button class="btn btn-primary" onclick="sendMessage()"><i
+                                    class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const messagesArea = document.getElementById('messagesArea');
+            const text = input.value.trim();
+
+            if (text) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'message sent';
+                msgDiv.textContent = text;
+                messagesArea.appendChild(msgDiv);
+                input.value = '';
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+
+                // Simulate reply
+                setTimeout(() => {
+                    const replyDiv = document.createElement('div');
+                    replyDiv.className = 'message received';
+                    replyDiv.textContent = "Thanks for the update!";
+                    messagesArea.appendChild(replyDiv);
+                    messagesArea.scrollTop = messagesArea.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // Send on Enter
+        document.getElementById('messageInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>

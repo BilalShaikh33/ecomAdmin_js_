@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Ecom Admin</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="layout-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-cube"></i> NexusAdmin
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </a>
+                <a href="categories.html" class="nav-item">
+                    <i class="fa-solid fa-layer-group"></i> Categories
+                </a>
+                <a href="orders.html" class="nav-item">
+                    <i class="fa-solid fa-shopping-bag"></i> Orders
+                </a>
+                <a href="users.html" class="nav-item">
+                    <i class="fa-solid fa-users"></i> Users
+                </a>
+                <a href="chat.html" class="nav-item">
+                    <i class="fa-solid fa-comments"></i> Chat
+                </a>
+                <a href="banners.html" class="nav-item">
+                    <i class="fa-solid fa-images"></i> Banners
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="header-search">
+                        <i class="fa-solid fa-search"
+                            style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                        <input type="text" placeholder="Search..." style="text-indent: 20px;">
+                    </div>
+                </div>
+                <div class="header-profile">
+                    <div class="notif-badge" style="position: relative; cursor: pointer;">
+                        <i class="fa-solid fa-bell" style="font-size: 1.2rem; color: var(--text-muted);"></i>
+                        <span
+                            style="position: absolute; top: -5px; right: -5px; background: var(--secondary-color); width: 8px; height: 8px; border-radius: 50%;"></span>
+                    </div>
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff" alt="Admin"
+                        class="profile-img">
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="page-content">
+                <h1 class="page-title">Dashboard Overview</h1>
+
+                <!-- Stats Cards -->
+                <div class="grid-container">
+                    <div class="card">
+                        <div class="card-title">Total Revenue</div>
+                        <i class="fa-solid fa-dollar-sign card-icon"></i>
+                        <div class="card-value">$45,231.89</div>
+                        <div style="color: var(--success); font-size: 0.875rem; margin-top: 0.5rem;">
+                            <i class="fa-solid fa-arrow-up"></i> +20.1% from last month
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Active Orders</div>
+                        <i class="fa-solid fa-shopping-cart card-icon"></i>
+                        <div class="card-value">+573</div>
+                        <div style="color: var(--success); font-size: 0.875rem; margin-top: 0.5rem;">
+                            <i class="fa-solid fa-arrow-up"></i> +12% from last month
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Total Users</div>
+                        <i class="fa-solid fa-user-group card-icon"></i>
+                        <div class="card-value">12,234</div>
+                        <div style="color: var(--warning); font-size: 0.875rem; margin-top: 0.5rem;">
+                            <i class="fa-solid fa-arrow-right"></i> +2% from last month
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Pending Issues</div>
+                        <i class="fa-solid fa-triangle-exclamation card-icon"></i>
+                        <div class="card-value">5</div>
+                        <div style="color: var(--danger); font-size: 0.875rem; margin-top: 0.5rem;">
+                            <i class="fa-solid fa-arrow-down"></i> -5% from last month
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Area -->
+                <div class="grid-container" style="grid-template-columns: 2fr 1fr;">
+                    <div class="card">
+                        <div class="card-title">Revenue Analytics</div>
+                        <canvas id="revenueChart" height="300"></canvas>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Traffic Source</div>
+                        <canvas id="trafficChart" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Orders using Table -->
+                <div class="card">
+                    <div class="flex-between" style="margin-bottom: 1.5rem;">
+                        <div class="card-title" style="margin-bottom: 0;">Recent Orders</div>
+                        <button class="btn btn-sm btn-primary">View All</button>
+                    </div>
+                    <div class="table-container" style="border: none; padding: 0;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#ORD-001</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <img src="https://ui-avatars.com/api/?name=John+Doe"
+                                                style="width: 24px; border-radius: 50%;">
+                                            John Doe
+                                        </div>
+                                    </td>
+                                    <td>Nike Air Max</td>
+                                    <td>$120.00</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-002</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <img src="https://ui-avatars.com/api/?name=Jane+Smith"
+                                                style="width: 24px; border-radius: 50%;">
+                                            Jane Smith
+                                        </div>
+                                    </td>
+                                    <td>Adidas Ultraboost</td>
+                                    <td>$180.00</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-003</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Ross"
+                                                style="width: 24px; border-radius: 50%;">
+                                            Mike Ross
+                                        </div>
+                                    </td>
+                                    <td>Puma Hoodie</td>
+                                    <td>$45.00</td>
+                                    <td><span class="badge badge-danger">Cancelled</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Chart Configuration
+        const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctxRevenue, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [12000, 19000, 3000, 5000, 22000, 30000],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+        const trafficChart = new Chart(ctxTraffic, {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct', 'Social', 'Referral'],
+                datasets: [{
+                    data: [55, 30, 15],
+                    backgroundColor: ['#6366f1', '#ec4899', '#8b5cf6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }
+            }
+        });
+    </script>
+</body>
+
+</html>

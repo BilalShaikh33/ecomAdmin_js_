@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banners | Ecom Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo"><i class="fa-solid fa-cube"></i> NexusAdmin</a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="categories.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Categories</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Orders</a>
+                <a href="users.html" class="nav-item"><i class="fa-solid fa-users"></i> Users</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+                <a href="banners.html" class="nav-item active"><i class="fa-solid fa-images"></i> Banners</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;"><i
+                        class="fa-solid fa-bars"></i></button>
+                <div class="page-title" style="margin: 0; font-size: 1.25rem;">Banners</div>
+                <div class="header-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff"
+                        class="profile-img">
+                </div>
+            </header>
+
+            <div class="page-content">
+                <div class="flex-between" style="margin-bottom: 2rem;">
+                    <h1 class="page-title" style="margin: 0;">Slider Management</h1>
+                    <button class="btn btn-primary">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload New Banner
+                    </button>
+                </div>
+
+                <div class="grid-container" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                    <!-- Banner 1 -->
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <img src="https://via.placeholder.com/600x300/334155/fff?text=Summer+Sale"
+                            style="width: 100%; height: 200px; object-fit: cover;">
+                        <div style="padding: 1.5rem;">
+                            <div class="flex-between" style="margin-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.1rem;">Summer Sale Main</h3>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">Updated 2
+                                hours ago</p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-sm"
+                                    style="flex: 1; border: 1px solid var(--border-color); color: var(--text-main);"
+                                    onclick="editItemGeneric(this, 'Banner')">Edit</button>
+                                <button class="btn btn-sm btn-danger" style="flex: 1;"
+                                    onclick="deleteItem(this)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner 2 -->
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <img src="https://via.placeholder.com/600x300/1e293b/fff?text=New+Collection"
+                            style="width: 100%; height: 200px; object-fit: cover;">
+                        <div style="padding: 1.5rem;">
+                            <div class="flex-between" style="margin-bottom: 0.5rem;">
+                                <h3 style="font-size: 1.1rem;">New Collection</h3>
+                                <span class="badge badge-warning">Scheduled</span>
+                            </div>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">Starts Jan
+                                1st</p>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-sm"
+                                    style="flex: 1; border: 1px solid var(--border-color); color: var(--text-main);">Edit</button>
+                                <button class="btn btn-sm btn-danger" style="flex: 1;">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner 3 -->
+                    <div class="card"
+                        style="padding: 0; overflow: hidden; border: 2px dashed var(--border-color); background: transparent; display: flex; align-items: center; justify-content: center; min-height: 350px;">
+                        <div style="text-align: center;">
+                            <i class="fa-solid fa-plus"
+                                style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                            <p style="color: var(--text-muted);">Add New Banner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
