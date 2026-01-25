@@ -1,124 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users | Ecom Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Users - AdminPro</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="layout-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <a href="index.html" class="logo"><i class="fa-solid fa-cube"></i> NexusAdmin</a>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-                <a href="categories.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Categories</a>
-                <a href="orders.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Orders</a>
-                <a href="users.html" class="nav-item active"><i class="fa-solid fa-users"></i> Users</a>
-                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
-                <a href="banners.html" class="nav-item"><i class="fa-solid fa-images"></i> Banners</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="login.html" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-            </div>
-        </aside>
-
-        <main class="main-content">
-            <header class="top-header">
-                <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;"><i
-                        class="fa-solid fa-bars"></i></button>
-                <div class="page-title" style="margin: 0; font-size: 1.25rem;">Users</div>
-                <div class="header-profile">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff"
-                        class="profile-img">
-                </div>
-            </header>
-
-            <div class="page-content">
-                <div class="flex-between" style="margin-bottom: 2rem;">
-                    <h1 class="page-title" style="margin: 0;">User Management</h1>
-                    <div class="header-search">
-                        <input type="text" placeholder="Search users..." style="width: 250px; text-indent: 10px;">
-                    </div>
-                </div>
-
-                <div class="grid-container">
-                    <div class="card" style="text-align: center;">
-                        <img src="https://ui-avatars.com/api/?name=Sarah+Connor&background=random"
-                            style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0.5rem;">Sarah Connor</h3>
-                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">sarah@skynet.com
-                        </p>
-                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                            <button class="btn btn-sm btn-primary" onclick="viewItem(this, 'User')">Details</button>
-                            <button class="btn btn-sm btn-danger" onclick="toggleBlock(this)">Block</button>
-                        </div>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <img src="https://ui-avatars.com/api/?name=Kyle+Reese&background=random"
-                            style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0.5rem;">Kyle Reese</h3>
-                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-                            kyle@resistance.org</p>
-                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                            <button class="btn btn-sm btn-primary" onclick="viewItem(this, 'User')">Details</button>
-                            <button class="btn btn-sm btn-danger" onclick="toggleBlock(this)">Block</button>
-                        </div>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <!-- BLOCKED USER EXAMPLE -->
-                        <img src="https://ui-avatars.com/api/?name=T-800&background=000&color=fff"
-                            style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem; filter: grayscale(100%);">
-                        <h3 style="margin-bottom: 0.5rem;">T-800</h3>
-                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-                            model101@cyberdyne.com</p>
-                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                            <button class="btn btn-sm btn-primary" onclick="viewItem(this, 'User')">Details</button>
-                            <button class="btn btn-sm btn-danger"
-                                style="background-color: var(--success); color: white;"
-                                onclick="toggleBlock(this)">Unblock</button>
-                        </div>
-                    </div>
-                    <div class="card" style="text-align: center;">
-                        <img src="https://ui-avatars.com/api/?name=Ellen+Ripley&background=random"
-                            style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0.5rem;">Ellen Ripley</h3>
-                        <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
-                            ripley@nostromo.space</p>
-                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
-                            <button class="btn btn-sm btn-primary" onclick="viewItem(this, 'User')">Details</button>
-                            <button class="btn btn-sm btn-danger" onclick="toggleBlock(this)">Block</button>
-                        </div>
-                    </div>
+    <div class="dashboard-layout">
+        <div id="sidebar-container"></div>
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Users</h1>
+                <div class="actions">
+                    <!-- Read only for now -->
                 </div>
             </div>
-        </main>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <script src="app.js"></script>
+
+    <script src="script.js"></script>
     <script>
-        function toggleBlock(btn) {
-            if (btn.innerText === "Block") {
-                btn.innerText = "Unblock";
-                btn.style.backgroundColor = "var(--success)";
-                btn.style.color = "white";
-                // Add grayscale effect to parent card image for visual feedback
-                const img = btn.closest('.card').querySelector('img');
-                if (img) img.style.filter = "grayscale(100%)";
-            } else {
-                btn.innerText = "Block";
-                btn.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
-                btn.style.color = "var(--danger)";
-                const img = btn.closest('.card').querySelector('img');
-                if (img) img.style.filter = "none";
-            }
+        checkAuth();
+        document.getElementById('sidebar-container').innerHTML = getSidebar();
+
+        const users = getData('users');
+        const tableBody = document.getElementById('table-body');
+
+        function render() {
+            tableBody.innerHTML = users.map(u => `
+                <tr>
+                    <td>#${u.id}</td>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>
+                        <span style="background: rgba(79, 70, 229, 0.1); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem;">
+                            ${u.role}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
         }
+
+        render();
     </script>
 </body>
-
 </html>

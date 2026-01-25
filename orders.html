@@ -1,144 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders | Ecom Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Orders - AdminPro</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="layout-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <a href="index.html" class="logo"><i class="fa-solid fa-cube"></i> NexusAdmin</a>
+    <div class="dashboard-layout">
+        <div id="sidebar-container"></div>
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Orders</h1>
+                <button class="btn btn-sm" onclick="openModal()">+ Add Order</button>
             </div>
-            <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-                <a href="categories.html" class="nav-item"><i class="fa-solid fa-layer-group"></i> Categories</a>
-                <a href="orders.html" class="nav-item active"><i class="fa-solid fa-shopping-bag"></i> Orders</a>
-                <a href="users.html" class="nav-item"><i class="fa-solid fa-users"></i> Users</a>
-                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
-                <a href="banners.html" class="nav-item"><i class="fa-solid fa-images"></i> Banners</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="login.html" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Data here -->
+                    </tbody>
+                </table>
             </div>
-        </aside>
-
-        <main class="main-content">
-            <header class="top-header">
-                <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;"><i
-                        class="fa-solid fa-bars"></i></button>
-                <div class="page-title" style="margin: 0; font-size: 1.25rem;">Orders</div>
-                <div class="header-profile">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff"
-                        class="profile-img">
-                </div>
-            </header>
-
-            <div class="page-content">
-                <div class="flex-between" style="margin-bottom: 2rem;">
-                    <h1 class="page-title" style="margin: 0;">Order History</h1>
-                    <div style="display: flex; gap: 1rem;">
-                        <input type="date" class="form-control" style="width: auto;">
-                        <button class="btn btn-primary"><i class="fa-solid fa-download"></i> Export</button>
-                    </div>
-                </div>
-
-                <div class="card table-container" style="border: none; padding: 0;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Date</th>
-                                <th>Customer</th>
-                                <th>Payment</th>
-                                <th>Total</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#ORD-7752</td>
-                                <td style="color: var(--text-muted);">Dec 28, 2025</td>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div
-                                            style="width: 32px; height: 32px; background: rgba(99, 102, 241, 0.1); border-radius: 50%; color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
-                                            JD</div>
-                                        <div>
-                                            <div style="font-weight: 500;">John Doe</div>
-                                            <div style="font-size: 0.75rem; color: var(--text-muted);">john@example.com
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Credit Card</td>
-                                <td style="font-weight: 600;">$1,250.00</td>
-                                <td><span class="badge badge-success">Completed</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--text-muted);"
-                                        onclick="viewItem(this, 'Order')"><i class="fa-solid fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7751</td>
-                                <td style="color: var(--text-muted);">Dec 27, 2025</td>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div
-                                            style="width: 32px; height: 32px; background: rgba(236, 72, 153, 0.1); border-radius: 50%; color: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
-                                            AS</div>
-                                        <div>
-                                            <div style="font-weight: 500;">Alice Smith</div>
-                                            <div style="font-size: 0.75rem; color: var(--text-muted);">alice@example.com
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>PayPal</td>
-                                <td style="font-weight: 600;">$450.50</td>
-                                <td><span class="badge badge-warning">Processing</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--text-muted);"><i
-                                            class="fa-solid fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#ORD-7750</td>
-                                <td style="color: var(--text-muted);">Dec 27, 2025</td>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div
-                                            style="width: 32px; height: 32px; background: rgba(139, 92, 246, 0.1); border-radius: 50%; color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
-                                            MR</div>
-                                        <div>
-                                            <div style="font-weight: 500;">Mike Ross</div>
-                                            <div style="font-size: 0.75rem; color: var(--text-muted);">mike@example.com
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Visa</td>
-                                <td style="font-weight: 600;">$89.99</td>
-                                <td><span class="badge badge-danger">Start Date</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--text-muted);"><i
-                                            class="fa-solid fa-eye"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
-    <script src="app.js"></script>
-</body>
 
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Edit Order</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="modal-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" class="form-input" id="ord-user" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Amount</label>
+                    <input type="number" class="form-input" id="ord-total" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select class="form-input" id="ord-status" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        checkAuth();
+        document.getElementById('sidebar-container').innerHTML = getSidebar();
+
+        let orders = getData('orders');
+        const tableBody = document.getElementById('table-body');
+        const modal = document.getElementById('modal');
+        const modalForm = document.getElementById('modal-form');
+
+        function render() {
+            tableBody.innerHTML = orders.map(o => `
+                <tr>
+                    <td>#${o.id}</td>
+                    <td>${o.user}</td>
+                    <td>$${o.total}</td>
+                    <td><span class="status-badge ${o.status.toLowerCase()}">${o.status}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="edit(${o.id})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="del(${o.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openModal(id = null) {
+            document.getElementById('edit-id').value = id || '';
+            document.getElementById('modal-title').textContent = id ? 'Edit Order' : 'Add Order';
+            if (id) {
+                const o = orders.find(ord => ord.id === id);
+                document.getElementById('ord-user').value = o.user;
+                document.getElementById('ord-total').value = o.total;
+                document.getElementById('ord-status').value = o.status;
+            } else {
+                modalForm.reset();
+            }
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        function edit(id) {
+            openModal(id);
+        }
+
+        function del(id) {
+            if(confirm('Are you sure?')) {
+                orders = orders.filter(o => o.id !== id);
+                setData('orders', orders);
+                render();
+            }
+        }
+
+        modalForm.onsubmit = (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const user = document.getElementById('ord-user').value;
+            const total = document.getElementById('ord-total').value;
+            const status = document.getElementById('ord-status').value;
+
+            if (id) {
+                const index = orders.findIndex(o => o.id == id);
+                orders[index] = { id: parseInt(id), user, total: parseInt(total), status };
+            } else {
+                const newId = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 101;
+                orders.push({ id: newId, user, total: parseInt(total), status });
+            }
+            setData('orders', orders);
+            render();
+            closeModal();
+        };
+
+        render();
+    </script>
+</body>
 </html>
