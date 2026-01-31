@@ -33,6 +33,7 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Price</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -40,7 +41,7 @@
                         <tr>
                             <td>
                                 <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3VreHppNzd3Nno3em01NnR0OWFoNzZ3cHI2NGY4NDU2OGZwcTdhOCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/L05HgB2h6qICDs5Sms/200.gif"
-                                    alt="" style="text-align: center;" class="img">
+                                    alt="" style="text-align: center;">
                             </td>
                         </tr>
                     </tbody>
@@ -53,7 +54,7 @@
     <div class="modal" id="modal">
         <div class="modal-content">
             <div>
-                <img src="" alt="" id="imgShow">
+                <img src="" alt="" id="imgShow" style="width: 200px; height: 200px;">
                 <input type="file" id="img">
             </div>
             <div class="modal-header">
@@ -76,7 +77,40 @@
                     <label class="form-label">Price</label>
                     <input type="number" class="form-input" id="prod-price" required>
                 </div>
-                <button type="submit" class="btn" onclick="addProd()">Save</button>
+                <button type="submit" class="btn" onclick="addProd()" id="saveBtn">Save</button>
+                <button type="button" class="btn" style="display: none;" id="updateBtn" onclick="updateData()">Update</button>
+            </form>
+        </div>
+    </div>
+        <!-- Edit modal -->
+        <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div>
+                <img src="" alt="" id="imgShow" style="width: 200px; height: 200px;">
+                <input type="file" id="img">
+            </div>
+            <div class="modal-header">
+                <h2 id="modal-title">Edit Product</h2>
+                <button class="close-modal" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="modal-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-input" id="editprod-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-input" id="editprod-cat" required>
+                        <!-- Options filled via JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Price</label>
+                    <input type="number" class="form-input" id="editprod-price" required>
+                </div>
+                <button type="submit" class="btn" onclick="addProd()" id="saveBtn">Save</button>
+                <button type="button" class="btn" style="display: none;" id="updateBtn" onclick="updateData()">Update</button>
             </form>
         </div>
     </div>

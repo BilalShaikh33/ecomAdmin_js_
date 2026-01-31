@@ -5,6 +5,14 @@ var prodName = document.getElementById("prod-name")
 var prodCat = document.getElementById("prod-cat")
 var prodPrice = document.getElementById("prod-price")
 var tableBody = document.getElementById("table-body")
+var updateBtn = document.getElementById("updateBtn")
+var saveBtn = document.getElementById("saveBtn")
+var selectedId = ""
+var editModal = document.getElementById("editModal")
+var editprodName = document.getElementById("editprod-name")
+var editprodPrice = document.getElementById("editprod-price")
+var editprodCat = document.getElementById("editprod-cat")
+
 
 async function addProd() {
     event.preventDefault()
@@ -20,7 +28,7 @@ async function addProd() {
             prodCat: prodCat.value,
             prodPrice: prodPrice.value,
             prodImage: prodImageUrl,
-            prodKey: prodKey,
+            prodKey: prodKey
         }
         await firebase.database().ref("Products").child(prodKey).set(object)
         alert("Added new product")
@@ -61,8 +69,38 @@ async function getAllCat() {
         })
 }
 
-function openModal(id = null) {
-    modal.classList.add("active")
+async function openModal(id = null) {
+    document.getElementById("edit-id").value = id || "";
+    document.getElementById("modal-title").textContent = id
+        ? "Edit Product"
+        : "Add Product";
+    selectedId = id
+    console.log(selectedId)
+    if (id != null) {
+        await firebase.database().ref("Products").child(id).get()
+            .then((snapdb) => {
+                console.log(snapdb.val())
+                // var selectedProd = Object.values(snapdb.val())
+                // console.log(selectedProd)
+                document.getElementById("prod-name").value = snapdb.val()["prodName"]
+                document.getElementById("prod-cat").value = snapdb.val()["prodCat"]
+                document.getElementById("prod-price").value = snapdb.val()["prodPrice"]
+                updateBtn.style.display = "inline"
+                saveBtn.style.display = "none"
+
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+    else {
+        document.getElementById("prod-name").value = ""
+        document.getElementById("prod-cat").value = ""
+        document.getElementById("prod-price").value = ""
+        updateBtn.style.display = "none"
+        saveBtn.style.display = "inline"
+    }
+    modal.classList.add("active");
 
 
 }
@@ -134,8 +172,8 @@ async function getAllProduct() {
           <td>${data[i]["prodPrice"]}</td>
           <td><img src = "${data[i].prodImage}" style ="width : 100px; height : 100px;" ></td>
           <td>
-          <button onclick="openModal('${data[i]["catKey"]}')" class = "btn" style = "width: 100px; background-color: yellow; color: black">Edit</button>
-          <button onclick="deleteItem('${data[i]["catKey"]}')" class = "btn" style = "width: 100px; background-color: red; color: black; margin-left: 10px;">Delete</button>
+          <button onclick="openModal('${data[i]["prodKey"]}')" class = "btn" style = "width: 100px; background-color: yellow; color: black">Edit</button>
+          <button onclick="deleteItem('${data[i]["prodKey"]}')" class = "btn" style = "width: 100px; background-color: red; color: black; margin-left: 10px;">Delete</button>
           </td>
           </tr>
           `
@@ -151,6 +189,61 @@ async function getAllProduct() {
             console.log(e)
         })
 
+}
+async function deleteItem(prodKey) {
+    await firebase.database().ref("Products").child(prodKey).remove()
+    // console.log(firebase.database().ref("Product").child(prodKey))
+    alert("deleted item")
+    getAllProduct()
+}
+
+
+async function updateData() {
+
+    // const id = document.getElementById("edit-id").value;
+    const productName = document.getElementById("prod-name").value;
+    const category = document.getElementById("prod-cat").value;
+    const productPrice = document.getElementById("prod-price").value;
+
+    //   push=> make new key => key =>make new key 
+    //   set => set data /replace
+
+    // Math.random()*1000=>0,1,2,
+    // var catKey = firebase.database().ref("CATGEORY").push().getKey() // key generate   5
+    // uid => uid
+
+    var object = {
+        prodName: productName,
+        prodCat: category,
+        prodPrice: productPrice,
+        prodKey: selectedId
+    }
+
+    console.log(object)
+
+    await firebase.database().ref("Products").child(selectedId).set(object)
+    alert("Updated category")
+    getAllProduct()
+
+
+    closeModal();
+};
+
+
+async function EditModal() {
+
+
+    editModal.classList.add("active");
+    await firebase.database().ref("Products").child(key).get().then((snap) => {
+        console.log(snap.val())
+        document.getElementById("editprod-name").value = snap.val()["prodName"]
+        document.getElementById("editprod-cat").value = snap.val()["prodCat"]
+        document.getElementById("editprod-price").value = snap.val()["prodPrice"]
+
+    })
+}
+function closeEditModal(){
+    editModal.classList.remove("active");
 }
 
 getAllProduct()
