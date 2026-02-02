@@ -4,166 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories | Ecom Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Categories - AdminPro</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: var(--bg-panel);
-            padding: 2rem;
-            border-radius: 1rem;
-            width: 100%;
-            max-width: 500px;
-            border: 1px solid var(--border-color);
-        }
-    </style>
 </head>
 
 <body>
-    <div class="layout-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <a href="index.html" class="logo"><i class="fa-solid fa-cube"></i> NexusAdmin</a>
+    <div class="dashboard-layout">
+        <div id="sidebar-container"></div>
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Categories</h1>
+                <button class="btn btn-sm" onclick="openModal()">+ Add Category</button>
             </div>
-            <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-                <a href="categories.html" class="nav-item active"><i class="fa-solid fa-layer-group"></i> Categories</a>
-                <a href="orders.html" class="nav-item"><i class="fa-solid fa-shopping-bag"></i> Orders</a>
-                <a href="users.html" class="nav-item"><i class="fa-solid fa-users"></i> Users</a>
-                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
-                <a href="banners.html" class="nav-item"><i class="fa-solid fa-images"></i> Banners</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="login.html" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Product Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td>
+                                <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3VreHppNzd3Nno3em01NnR0OWFoNzZ3cHI2NGY4NDU2OGZwcTdhOCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/L05HgB2h6qICDs5Sms/200.gif"
+                                    alt="" style="text-align: center;">
+                            </td>
+                        </tr>
+                        <!-- Data here -->
+                    </tbody>
+                </table>
             </div>
-        </aside>
-
-        <main class="main-content">
-            <header class="top-header">
-                <button class="btn btn-sm btn-primary" id="menu-toggle" style="display: none;"><i
-                        class="fa-solid fa-bars"></i></button>
-                <div class="page-title" style="margin: 0; font-size: 1.25rem;">Categories</div>
-                <div class="header-profile">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff"
-                        class="profile-img">
-                </div>
-            </header>
-
-            <div class="page-content">
-                <div class="flex-between" style="margin-bottom: 2rem;">
-                    <h1 class="page-title" style="margin: 0;">Category Management</h1>
-                    <button class="btn btn-primary" onclick="prepareAddCategory()">
-                        <i class="fa-solid fa-plus"></i> Add Category
-                    </button>
-                </div>
-
-                <div class="card table-container" style="border: none; padding: 0;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Products</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Electronics</td>
-                                <td style="color: var(--text-muted);">Gadgets and devices</td>
-                                <td>1,240</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--primary-color);"
-                                        onclick="editCategory(this)"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn btn-sm" style="color: var(--danger);"
-                                        onclick="deleteItem(this)"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fashion</td>
-                                <td style="color: var(--text-muted);">Clothing and apparel</td>
-                                <td>850</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--primary-color);"><i
-                                            class="fa-solid fa-pen"></i></button>
-                                    <button class="btn btn-sm" style="color: var(--danger);"><i
-                                            class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Home & Garden</td>
-                                <td style="color: var(--text-muted);">Furniture and decor</td>
-                                <td>532</td>
-                                <td><span class="badge badge-warning">Draft</span></td>
-                                <td>
-                                    <button class="btn btn-sm" style="color: var(--primary-color);"><i
-                                            class="fa-solid fa-pen"></i></button>
-                                    <button class="btn btn-sm" style="color: var(--danger);"><i
-                                            class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal" id="categoryModal">
-        <div class="modal-content">
-            <h2 style="margin-bottom: 1.5rem;">Add New Category</h2>
-            <form id="categoryForm">
-                <div class="form-group">
-                    <label class="form-label">Category Name</label>
-                    <input type="text" class="form-control" placeholder="e.g. Shoes">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" rows="3" placeholder="Brief description..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Status</label>
-                    <select class="form-control">
-                        <option>Active</option>
-                        <option>Draft</option>
-                        <option>Hidden</option>
-                    </select>
-                </div>
-                <div class="flex-between" style="margin-top: 2rem;">
-                    <button type="button" class="btn btn-danger"
-                        style="background: transparent; border: 1px solid var(--border-color); color: var(--text-muted);"
-                        onclick="closeModal()">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="saveCategory()">Save Category</button>
-                </div>
-            </form>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Category</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="modal-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" class="form-input" id="cat-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Product Count (Demo)</label>
+                    <input type="number" class="form-input" id="cat-count" required value="0">
+                </div>
+                <button type="submit" class="btn" id="saveBtn" onclick="addNewData()">Save</button>
+                <button type="button" class="btn" style="display: none;" id="updateBtn" onclick="updateData()">Update</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBuqZOTXkl8AR5zdkGT4VGZyHiVTEH-Bmk",
+            authDomain: "ecom-app-a0848.firebaseapp.com",
+            databaseURL: "https://ecom-app-a0848-default-rtdb.firebaseio.com/",
+            projectId: "ecom-app-a0848",
+            storageBucket: "ecom-app-a0848.firebasestorage.app",
+            messagingSenderId: "199558714844",
+            appId: "1:199558714844:web:e22c4216400fe5681eeb19",
+            measurementId: "G-LG47T79058"
+        };
 
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="script.js"></script>
+    <script src="categoris.js"></script>
 </body>
 
 </html>
