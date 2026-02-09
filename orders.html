@@ -74,21 +74,6 @@
         const modal = document.getElementById('modal');
         const modalForm = document.getElementById('modal-form');
 
-        function render() {
-            tableBody.innerHTML = orders.map(o => `
-                <tr>
-                    <td>#${o.id}</td>
-                    <td>${o.user}</td>
-                    <td>$${o.total}</td>
-                    <td><span class="status-badge ${o.status.toLowerCase()}">${o.status}</span></td>
-                    <td>
-                        <button class="action-btn edit-btn" onclick="edit(${o.id})">Edit</button>
-                        <button class="action-btn delete-btn" onclick="del(${o.id})">Delete</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
         function openModal(id = null) {
             document.getElementById('edit-id').value = id || '';
             document.getElementById('modal-title').textContent = id ? 'Edit Order' : 'Add Order';
@@ -111,13 +96,13 @@
             openModal(id);
         }
 
-        function del(id) {
-            if(confirm('Are you sure?')) {
-                orders = orders.filter(o => o.id !== id);
-                setData('orders', orders);
-                render();
-            }
-        }
+        // function del(id) {
+        //     if(confirm('Are you sure?')) {
+        //         orders = orders.filter(o => o.id !== id);
+        //         setData('orders', orders);
+        //         render();
+        //     }
+        // }
 
         modalForm.onsubmit = (e) => {
             e.preventDefault();
