@@ -104,26 +104,26 @@
             }
         }
 
-        // modalForm.onsubmit = (e) => {
-        //     e.preventDefault();
-        //     const id = document.getElementById('edit-id').value;
-        //     const user = document.getElementById('ord-user').value;
-        //     const total = document.getElementById('ord-total').value;
-        //     const status = document.getElementById('ord-status').value;
+        modalForm.onsubmit = (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const user = document.getElementById('ord-user').value;
+            const total = document.getElementById('ord-total').value;
+            const status = document.getElementById('ord-status').value;
 
-        //     if (id) {
-        //         const index = orders.findIndex(o => o.id == id);
-        //         orders[index] = { id: parseInt(id), user, total: parseInt(total), status };
-        //     } else {
-        //         const newId = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 101;
-        //         orders.push({ id: newId, user, total: parseInt(total), status });
-        //     }
-        //     setData('orders', orders);
-        //     render();
-        //     closeModal();
-        // };
+            if (id) {
+                const index = orders.findIndex(o => o.id == id);
+                orders[index] = { id: parseInt(id), user, total: parseInt(total), status };
+            } else {
+                const newId = orders.length > 0 ? Math.max(...orders.map(o => o.id)) + 1 : 101;
+                orders.push({ id: newId, user, total: parseInt(total), status });
+            }
+            setData('orders', orders);
+            render();
+            closeModal();
+        };
 
-        // render();
+        render();
     </script>
 </body>
 </html>
